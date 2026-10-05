@@ -1,6 +1,6 @@
 :root {
     --gradiente-fundo: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-    --fundo-cartao: #ffffff;
+    --fundo-cartao: rgba(255, 255, 255, 0.75);
     --cor-texto: #2d3748;
     --cor-primaria: #6c5ce7;
     --cor-primaria-destaque: #5b4bc4;
@@ -11,7 +11,7 @@
 
 body.modo-escuro {
     --gradiente-fundo: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-    --fundo-cartao: #1a202c;
+    --fundo-cartao: rgba(26, 32, 44, 0.75);
     --cor-texto: #f7fafc;
     --cor-borda: #4a5568;
 }
@@ -25,16 +25,28 @@ body.modo-escuro {
 }
 
 body {
-    background: var(--gradiente-fundo);
+    background-image: url('ligth.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 20px;
+}
+
+body.modo-escuro {
+    background-image: url('darck.gif');
 }
 
 .cartao-aplicacao {
     background: var(--fundo-cartao);
+    backdrop-filter: blur(10px);
+    /* ESSE FILTRO FAZ A TRANSPARÊNCIA APARECER DE VERDADE */
+    -webkit-backdrop-filter: blur(10px);
+    /* Compatibilidade com alguns navegadores */
     color: var(--cor-texto);
     width: 100%;
     max-width: 420px;
@@ -172,4 +184,50 @@ input[type="text"]:focus {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+#imagem-coelho,
+#imagem-onça {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    pointer-events: none;
+}
+
+/* 1. MODO CLARO: Mostra a Onça */
+#imagem-onça {
+    width: 650px;
+    margin-top: 10px;
+    mix-blend-mode: multiply;
+}
+
+#imagem-coelho {
+    display: none;
+}
+
+body.modo-escuro #imagem-onça {
+    display: none;
+}
+
+body.modo-escuro #imagem-coelho {
+    display: block;
+    width: 140px;
+    margin-top: 150px;
+    mix-blend-mode: screen;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#fotominha {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 150px;
+    height: auto;
+    z-index: 999;
+    border: 4px solid #6c5ce7;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px;
 }
