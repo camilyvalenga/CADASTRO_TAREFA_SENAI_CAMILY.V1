@@ -44,9 +44,7 @@ body.modo-escuro {
 .cartao-aplicacao {
     background: var(--fundo-cartao);
     backdrop-filter: blur(10px);
-    /* ESSE FILTRO FAZ A TRANSPARÊNCIA APARECER DE VERDADE */
     -webkit-backdrop-filter: blur(10px);
-    /* Compatibilidade com alguns navegadores */
     color: var(--cor-texto);
     width: 100%;
     max-width: 420px;
@@ -195,7 +193,6 @@ input[type="text"]:focus {
     pointer-events: none;
 }
 
-/* 1. MODO CLARO: Mostra a Onça */
 #imagem-onça {
     width: 650px;
     margin-top: 10px;

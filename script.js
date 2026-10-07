@@ -14,6 +14,25 @@ class Tarefa {
 
 const listaDeTarefas = [];
 
+// [ADICIONADO] Chave e funções de persistência com localStorage
+const CHAVE_STORAGE = "sistema_lista_tarefas";
+
+function salvarNoLocalStorage() {
+    localStorage.setItem(CHAVE_STORAGE, JSON.stringify(listaDeTarefas));
+}
+
+function carregarDoLocalStorage() {
+    const dadosSalvos = localStorage.getItem(CHAVE_STORAGE);
+    if (dadosSalvos) {
+        const tarefasObjetos = JSON.parse(dadosSalvos);
+        tarefasObjetos.forEach((t) => {
+            const tarefaInstanciada = new Tarefa(t.descricao);
+            tarefaInstanciada.concluida = t.concluida; // Restaura se estava concluída
+            listaDeTarefas.push(tarefaInstanciada);
+        });
+    }
+}
+
 const botaoAdicionar = document.getElementById("botao-adicionar");
 const campoTarefa = document.getElementById("campo-tarefa");
 
@@ -31,6 +50,9 @@ function adicionarNovaTarefa() {
     try {
         const novaTarefa = new Tarefa(descricaoInput);
         listaDeTarefas.push(novaTarefa);
+        
+        salvarNoLocalStorage(); // [ADICIONADO] Salva após adicionar
+        
         renderizarLista();
         campoTarefa.value = "";
         campoTarefa.focus();
@@ -82,11 +104,13 @@ function atualizarContador() {
 
 function alternarConclusao(index) {
     listaDeTarefas[index].alternarStatus();
+    salvarNoLocalStorage(); // [ADICIONADO] Salva após alterar o status
     renderizarLista();
 }
 
 function removerTarefa(index) {
     listaDeTarefas.splice(index, 1);
+    salvarNoLocalStorage(); // [ADICIONADO] Salva após remover
     renderizarLista();
 }
 
@@ -102,3 +126,7 @@ botaoTema.addEventListener("click", () => {
         icone.className = "fa-solid fa-moon";
     }
 });
+
+// [ADICIONADO] Carrega do storage e renderiza assim que o script abre
+carregarDoLocalStorage();
+renderizarLista();
