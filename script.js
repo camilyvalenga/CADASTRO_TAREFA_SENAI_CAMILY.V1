@@ -14,7 +14,6 @@ class Tarefa {
 
 const listaDeTarefas = [];
 
-// [ADICIONADO] Chave e funções de persistência com localStorage
 const CHAVE_STORAGE = "sistema_lista_tarefas";
 
 function salvarNoLocalStorage() {
@@ -27,7 +26,7 @@ function carregarDoLocalStorage() {
         const tarefasObjetos = JSON.parse(dadosSalvos);
         tarefasObjetos.forEach((t) => {
             const tarefaInstanciada = new Tarefa(t.descricao);
-            tarefaInstanciada.concluida = t.concluida; // Restaura se estava concluída
+            tarefaInstanciada.concluida = t.concluida;
             listaDeTarefas.push(tarefaInstanciada);
         });
     }
@@ -50,9 +49,7 @@ function adicionarNovaTarefa() {
     try {
         const novaTarefa = new Tarefa(descricaoInput);
         listaDeTarefas.push(novaTarefa);
-        
-        salvarNoLocalStorage(); // [ADICIONADO] Salva após adicionar
-        
+        salvarNoLocalStorage();
         renderizarLista();
         campoTarefa.value = "";
         campoTarefa.focus();
@@ -62,8 +59,11 @@ function adicionarNovaTarefa() {
 }
 
 function renderizarLista() {
-    const listaUl = document.getElementById("lista-tarefas");
-    listaUl.innerHTML = "";
+    const listaPendentes = document.getElementById("lista-pendentes");
+    const listaConcluidas = document.getElementById("lista-concluidas");
+    
+    listaPendentes.innerHTML = "";
+    listaConcluidas.innerHTML = "";
 
     listaDeTarefas.forEach((tarefa, index) => {
         const itemLista = document.createElement("li");
@@ -85,7 +85,12 @@ function renderizarLista() {
             </div>
         `;
 
-        listaUl.appendChild(itemLista);
+        // Separa dinamicamente nos cards correspondentes
+        if (tarefa.concluida) {
+            listaConcluidas.appendChild(itemLista);
+        } else {
+            listaPendentes.appendChild(itemLista);
+        }
     });
 
     atualizarContador();
@@ -104,13 +109,13 @@ function atualizarContador() {
 
 function alternarConclusao(index) {
     listaDeTarefas[index].alternarStatus();
-    salvarNoLocalStorage(); // [ADICIONADO] Salva após alterar o status
+    salvarNoLocalStorage();
     renderizarLista();
 }
 
 function removerTarefa(index) {
     listaDeTarefas.splice(index, 1);
-    salvarNoLocalStorage(); // [ADICIONADO] Salva após remover
+    salvarNoLocalStorage();
     renderizarLista();
 }
 
@@ -127,6 +132,5 @@ botaoTema.addEventListener("click", () => {
     }
 });
 
-// [ADICIONADO] Carrega do storage e renderiza assim que o script abre
 carregarDoLocalStorage();
 renderizarLista();

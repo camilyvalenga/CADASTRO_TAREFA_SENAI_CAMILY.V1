@@ -11,27 +11,41 @@
 </head>
 
 <body>
-    <div class="cartao-aplicacao">
+    <div class="container-principal">
 
-        <header class="cabecalio-aplicacao">
-            <h1>𝙈𝙞𝙣𝙝𝙖𝙨 𝙏𝙖𝙧𝙚𝙛𝙖𝙨✨</h1>
-            <button class="botao-icone" id="botao-alterar-tema">
-                <i class="fa-solid fa-moon"></i>
-            </button>
-        </header>
+        <!-- CARD 1: CABEÇALHO E ENTRADA -->
+        <div class="cartao-aplicacao">
+            <header class="cabecalio-aplicacao">
+                <h1>Mɪɴʜᴀs Tᴀʀᴇғᴀs✨</h1>
+                <button class="botao-icone" id="botao-alterar-tema">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+            </header>
 
-        <div class="caixa-entrada">
-            <input type="text" id="campo-tarefa" placeholder="O que vamos fazer hoje?..." maxlength="40">
-            <button class="botao-principal" id="botao-adicionar">
-                <i class="fa-solid fa-plus"></i>Adicionar
-            </button>
+            <div class="caixa-entrada">
+                <input type="text" id="campo-tarefa" placeholder="O que vamos fazer hoje?..." maxlength="40">
+                <button class="botao-principal" id="botao-adicionar">
+                    <i class="fa-solid fa-plus"></i>Adicionar
+                </button>
+            </div>
+            
+            <footer class="radape-aplicacao">
+                <span id="contador-tarefas">0 tarefas na lista</span>
+            </footer>
         </div>
 
-        <ul class="lista-tarefas" id="lista-tarefas"></ul>
+        <!-- CARD 2: PAINEL DE TAREFAS PENDENTES -->
+        <div class="cartao-aplicacao card-secao">
+            <h2>⌛︎ Pendentes</h2>
+            <ul class="lista-tarefas" id="lista-pendentes"></ul>
+        </div>
 
-        <footer class="radape-aplicacao">
-            <span id="contador-tarefas">0 tarefas na lista</span>
-        </footer>
+        <!-- CARD 3: PAINEL DE TAREFAS CONCLUÍDAS -->
+        <div class="cartao-aplicacao card-secao">
+            <h2>✓ Concluídas</h2>
+            <ul class="lista-tarefas" id="lista-concluidas"></ul>
+        </div>
 
     </div>
 
@@ -39,7 +53,7 @@
 
     <img id="imagem-coelho" src="coelho.gif" alt="">
     <img id="imagem-onça" src="onça.gif" alt="">
-    <img id="fotominha"   src="fotominha.jpeg" alt="">
+    <img id="fotominha" src="fotominha.jpeg" alt="">
 </body>
 
 </html>
